@@ -1,7 +1,9 @@
 // require express and other modules
 var express = require('express'),
     app = express();
+    db = require('./models');
 
+    var app = express();
 // parse incoming urlencoded form data
 // and populate the req.body object
 var bodyParser = require('body-parser');
@@ -60,13 +62,62 @@ app.get('/api', function apiIndex(req, res) {
 });
 
 app.get('/api/profile', function profile(req, res){
-   res.json(
+    res.json(
             {name: "Brett Monzel",
               githubLink: "https://github.com/monzelb",              
               personalSiteLink: "https://monzelb.github.io/",
               cityOfOrigin: "Cincinnati, Ohio",
               currentCity: "San Francisco, California",
               })
+});
+
+app.get('/api/photography', function (req, res) {
+  // find one book by its id
+  db.Photo.find({}, function(err, photos){
+      if (err) {
+        res.status(500).send(err);
+        return;
+      }
+      res.json(photos);
+  });
+});
+
+app.get('/api/locations', function (req, res) {
+  db.Location.find({}, function(err, locations){
+      if(err){
+        res.status(500).send(err);
+        return;
+      }
+      res.json(locations);
+  });
+});
+
+
+
+app.post('/api/photography', function (req, res) {
+  // create new book with form data (`req.body`)
+  var newPhoto = new db.Photo({
+    location: req.body.location,
+    image: req.body.image
+  });
+  // find the author from req.body
+  db.Location.findOne({name: req.body.location}, function(err, location){
+    if (err) {
+      return console.log(err);
+    }
+    // add this author to the book
+    newPhoto.location = location;
+    // save newBook to database
+    newPhoto.save(function(err, photo){
+      if (err) {
+        return console.log("save error: " + err);
+      }
+      console.log("saved ", photo.title);
+      // send back the book!
+      res.json(photo);
+    });
+  });
+
 });
 
 /**********

@@ -18,16 +18,19 @@ var db = require('./models');
 
 var photo_list = [
   {
+  name: "photo1",
   location: "San Francisco",
   image: "https://raw.githubusercontent.com/monzelb/monzelb.github.io/master/assets/imgs/ocean.jpg",
   contents: "ocean"
   },
   {
+  name: "photo2",
   location: "Canada",
   image: "",
   contents: "mountains"
   },
   {
+  name: "photo3",
   location: "Mt. Shasta",
   image: "",
   contents: "mountains"
@@ -40,22 +43,44 @@ var location_list= [
    name: "San Francisco"
   },
   {
-   name: "British Columbia"
+   name: "Vancouver"
+  },
+  {
+  name: "rural Canada"
   }
 ]
 
-var content_list = [
-   {
-   name: "ocean"
-   },
-   {
-   name: "mountains"
-   },
-   {
-   name: "city"
-   }
-]
 
+db.Photo.remove({}, function(err, photo){
+  if(err) {
+    console.log('Error occurred in remove', err);
+  } else {
+       console.log('removed all photo');
+
+    // create new records based on the array books_list
+       db.Photo.create(photo_list, function(err, photos){
+      	if (err) { return console.log('err', err); }
+     	 console.log("created", photos.length, "photos");
+      	
+       });
+  }
+});
+
+db.Location.remove({}, function(err, location){
+	if(err){
+		console.log("Error", err);
+	} else{
+		console.log("removed all locations");
+
+	   db.Location.create(location_list, function(err, locations){
+    	   if(err){ return console.log("err", err);}
+    	   console.log("created", locations.length, "locations");
+    	   process.exit();
+       });
+    }
+})
+
+/*
 db.Location.remove({}, function(err, locations) {
   console.log('removed all photos');
   db.Location.create(location_list, function(err, locations){
@@ -65,21 +90,11 @@ db.Location.remove({}, function(err, locations) {
     }
     console.log('recreated all locations');
     console.log("created", locations.length, "locations");
-
-    db.Contents.remove({}, function(err, contents) {
-  console.log('removed all contents');
-  db.Contents.create(content_list, function(err, contents){
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log('recreated all contents');
-    console.log("created", contents.length, "contents");
-
+  
 
     db.Photo.remove({}, function(err, photos){
       console.log('removed all photos');
-      photos_list.forEach(function (photoData) {
+      photo_list.forEach(function (photoData) {
         var photo = new db.Photo({
           image: photoData.image,
           contents: photoData.contents
@@ -103,3 +118,5 @@ db.Location.remove({}, function(err, locations) {
 
   });
 });
+
+*/
