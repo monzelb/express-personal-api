@@ -29,19 +29,12 @@ app.use(function(req, res, next) {
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
 
-
-var profile= [{name: "Brett Monzel",
-              githubLink: "https://github.com/monzelb",              
-              personalSiteLink: "https://monzelb.github.io/",
-              cityOfOrigin: "Cincinnati, Ohio",
-              currentCity: "San Francisco, California"
-              }]
 /*
  * HTML Endpoints
  */
 
-app.get('/', function homepage(req, res) {
-  res.sendFile(__dirname + '/views/index.html');
+app.get('/', function (req, res) {
+  res.sendFile('views/index.html' , { root : __dirname});
 });
 
 
@@ -59,8 +52,9 @@ app.get('/api', function apiIndex(req, res) {
     baseUrl: "https://powerful-brushlands-77187.herokuapp.com/", // CHANGE ME
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Important facts about me"}, // CHANGE ME
-      {method: "POST", path: "/api/photography", description: "Photographs I've taken"} // CHANGE ME
+      {method: "GET", path: "/api/profile", description: "Important facts about me"}, 
+      {method: "GET", path: "/api/photography", description: "Photographs I've taken"} ,
+
     ]
   })
 });

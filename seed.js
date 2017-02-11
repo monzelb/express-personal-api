@@ -13,3 +13,27 @@
 //   console.log("Created new campsite", campsite._id)
 //   process.exit(); // we're all done! Exit the program.
 // })
+
+var db = require('./models');
+
+var photo_list = [
+  {
+  id: 1,
+  location: "San Francisco",
+  image: "",
+  contains: "Ocean"
+  },
+  {
+  id: 2,
+  location: "Canada",
+  image: "",
+  contains: "Mountains"
+  },
+  {
+  id: 3,
+  location: "Mt. Shasta",
+  image: "",
+  contains: "mountains"
+  },
+ 
+];
