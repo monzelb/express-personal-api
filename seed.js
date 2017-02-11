@@ -20,7 +20,7 @@ var photo_list = [
   {
   id: 1,
   location: "San Francisco",
-  image: "",
+  image: "https://raw.githubusercontent.com/monzelb/monzelb.github.io/master/assets/imgs/ocean.jpg",
   contains: "Ocean"
   },
   {
