@@ -19,7 +19,7 @@ var db = require('./models');
 var photo_list = [
   {
   name: "photo1",
-  location: "San Francisco",
+  location: "San Francisc",
   image: "https://raw.githubusercontent.com/monzelb/monzelb.github.io/master/assets/imgs/ocean.jpg",
   contents: "ocean"
   },

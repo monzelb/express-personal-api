@@ -25,33 +25,35 @@
           <hr>
           <h3>Add a new Photo</h3>
           <form class="form-inline" id="newPhotoForm">
-          <div class="form-group">
-            <label for="location">Location</label>
-            <input type="text" class="form-control" name="title" placeholder="San Francisco">
-          </div>
-          <div class="form-group">
-            <label for="image">Image URL</label>
-            <input type="text" class="form-control" name="image" placeholder="http:/...">
-          </div>
-          <div class="form-group">
-            <label for="contents">Contents of Photo</label>
-            <input type="text" class="form-control" name="contents" placeholder="ocean">
-          </div>
-          <button type="submit" class="btn btn-default">Create photo</button>
-        </form>
-        <hr>
+             <div class="form-group">
+               <label for="location">Location</label>
+               <input type="text" class="form-control" name="location" placeholder="San Francisco">
+             </div>
+             <div class="form-group">
+                <label for="image">Image URL</label>
+                <input type="text" class="form-control" name="image" placeholder="http:/...">
+            </div>
+            <div class="form-group">
+               <label for="contents">Contents of Photo</label>
+               <input type="text" class="form-control" name="contents" placeholder="ocean">
+            </div>
+            <button type="submit" class="btn btn-default">Create photo</button>
+          </form>
+          <hr>
           <h3>Search for Photos</h3>
-          <form class="form-inline" id="newPhotoForm">
-          <div class="form-group">
-            <label for="location">Location</label>
-            <input type="text" class="form-control" name="title" placeholder="San Francisco">
-          </div>
-          <div class="form-group">
-            <label for="contents">Contents of Photo</label>
-            <input type="text" class="form-control" name="contents" placeholder="ocean">
-          </div>
-          <button type="submit" class="btn btn-default">Create photo</button>
-        </form>
+          <form class="form-inline" id="searchPhotoForm">
+              <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" name="title" placeholder="San Francisco">
+              </div>
+              <div class="form-group">
+                 <label for="contents">Contents of Photo</label>
+                 <input type="text" class="form-control" name="contents" placeholder="ocean">
+              </div>
+              <button type="submit" class="btn btn-default">Create photo</button>
+           </form>
+           <h3 class="alertBox"></h3>
+           <div class="picDisplay"></div>
         </div>
       </div>
     </div>

@@ -49,13 +49,14 @@ app.get('/api', function apiIndex(req, res) {
   // It would be seriously overkill to save any of this to your database.
   res.json({
      // CHANGE ME ;)
-    message: "Welcome to my photography api! Here's what you need to know!",
+    message: "Welcome to my photography API! Here's what you need to know!",
     documentationUrl: "https://github.com/monzelb/express-personal-api/blob/master/README.md", // CHANGE ME
     baseUrl: "https://powerful-brushlands-77187.herokuapp.com/", // CHANGE ME
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Important facts about me"}, 
       {method: "GET", path: "/api/photography", description: "Photographs I've taken"} ,
+      {method: "GET", path: "api/ locations", description: "Locations of photographs in the database"}
 
     ]
   })
