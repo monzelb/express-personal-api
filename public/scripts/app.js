@@ -66,6 +66,7 @@ function newPhotoSuccess(json) {
   console.log(allPhotos)
   //$("picDisplay").append(`<img src="")
   //render();
+  $('.alertBox1').text("Photo successfully added!")
 }
 
 function newPhotoError() {
