@@ -19,7 +19,7 @@ var db = require('./models');
 var photo_list = [
   {
   name: "photo1",
-  location: "San Francisc",
+  location: "San Francisco",
   image: "https://raw.githubusercontent.com/monzelb/monzelb.github.io/master/assets/imgs/ocean.jpg",
   contents: "ocean"
   },
@@ -34,7 +34,7 @@ var photo_list = [
   location: "Mt. Shasta",
   image: "",
   contents: "mountains"
-  },
+  }
  
 ];
 
@@ -46,8 +46,17 @@ var location_list= [
    name: "Vancouver"
   },
   {
-  name: "rural Canada"
+  name: "rural British Columbia"
+  },
+  {
+  name: "Ohio"
   }
+];
+
+contents_list= [
+	{
+	name: "ocean"
+	}
 ]
 
 
@@ -61,6 +70,21 @@ db.Photo.remove({}, function(err, photo){
        db.Photo.create(photo_list, function(err, photos){
       	if (err) { return console.log('err', err); }
      	 console.log("created", photos.length, "photos");
+      	
+       });
+  }
+});
+
+db.Contents.remove({}, function(err, photo){
+  if(err) {
+    console.log('Error occurred in remove', err);
+  } else {
+       console.log('removed all photo');
+
+    // create new records based on the array books_list
+       db.Contents.create(contents_list, function(err, contents){
+      	if (err) { return console.log('err', err); }
+     	 console.log("created", contents.length, "contents");
       	
        });
   }

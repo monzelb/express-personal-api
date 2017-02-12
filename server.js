@@ -56,7 +56,8 @@ app.get('/api', function apiIndex(req, res) {
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Important facts about me"}, 
       {method: "GET", path: "/api/photography", description: "Photographs I've taken"} ,
-      {method: "GET", path: "api/ locations", description: "Locations of photographs in the database"}
+      {method: "GET", path: "api/locations", description: "Locations of photographs in the database"},
+      {method: "GET", path: "api/contents", description: "search photographs by location"}
 
     ]
   })
@@ -73,7 +74,7 @@ app.get('/api/profile', function profile(req, res){
 });
 
 app.get('/api/photography', function (req, res) {
-  // find one book by its id
+  // find all photos
   db.Photo.find({}, function(err, photos){
       if (err) {
         res.status(500).send(err);
@@ -82,6 +83,8 @@ app.get('/api/photography', function (req, res) {
       res.json(photos);
   });
 });
+
+
 
 app.get('/api/locations', function (req, res) {
   db.Location.find({}, function(err, locations){
@@ -94,32 +97,46 @@ app.get('/api/locations', function (req, res) {
 });
 
 
+//find one photo by id
+app.get('/api/photography/:id', function (req, res) {
+   db.Photo.findById(req.params.id, function(err, photo){
+     if(err){return console.log(err);}
+     res.json(photo);
+   })
+ })
 
+ //update contents
+  app.put('/api/contents/:id', function(req,res){
+    var photoName = req.body.name;
+    var photoContents = req.body.contents;
+    var photoImage = req.body.image;
+    var domainId = req.params.id;
+    db.Photo.findByIdAndUpdate(PhotoId, {
+        name: photoName,
+        characteristics: photoContents,
+        image: photoImage}, {new: true}, function(err, photo){
+          if(err){return console.log(err);}
+          res.json(photo);
+        })
+  });
+
+
+//post new photo
 app.post('/api/photography', function (req, res) {
-  // create new book with form data (`req.body`)
   var newPhoto = new db.Photo({
     location: req.body.location,
-    image: req.body.image
-  });
-  // find the author from req.body
-  db.Location.findOne({name: req.body.location}, function(err, location){
-    if (err) {
-      return console.log(err);
-    }
-    // add this author to the book
-    newPhoto.location = location;
-    // save newBook to database
+    image: req.body.image,
+    contents: req.body.contents
+})
     newPhoto.save(function(err, photo){
       if (err) {
         return console.log("save error: " + err);
       }
-      console.log("saved ", photo.title);
-      // send back the book!
       res.json(photo);
     });
   });
 
-});
+
 
 /**********
  * SERVER *

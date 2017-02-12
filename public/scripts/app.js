@@ -4,8 +4,6 @@ var allPhotos= [];
 
 $(document).ready(function(){
 
- 
-
   $.ajax({
     method: 'GET',
     url: '/api/photography',
@@ -23,6 +21,26 @@ $(document).ready(function(){
       error: newPhotoError
     });
   });
+
+  $('#searchLocationForm').on('submit', function(e){
+  	e.preventDefault();
+  	$.ajax({
+  		method: 'GET',
+  		url:'api/photography',
+  		data:$(this).serialize(),
+  		success: searchLocationSuccess(),
+  		error: searchLocationError()
+  	});
+  });
+
+  $('#searchContentsForm').on('submit', function(e){
+  	e.preventDefault();
+  	$.ajax({
+  		method: 'GET',
+  		url:'api/photography',
+  		data:$(this).serialize()
+  	})
+  })
 
  /* $booksList.on('click', '.deleteBtn', function() {
     $.ajax({
@@ -65,8 +83,21 @@ function newPhotoSuccess(json) {
   console.log(json)
   console.log(allPhotos)
   //$("picDisplay").append(`<img src="")
-  //render();
   $('.alertBox1').text("Photo successfully added!")
+}
+
+function searchLocationSuccess (json){
+	$('#searchLocationForm input').val('');
+  console.log(json)
+  allPhotos.push(json);
+  console.log(json)
+  console.log(allPhotos)
+  //$("picDisplay").append(`<img src="")
+  $('.alertBox1').text("Photo successfully added!")
+}
+
+function searchLocationError(e){
+	console.log("error")
 }
 
 function newPhotoError() {
@@ -74,14 +105,14 @@ function newPhotoError() {
 }
 
 function render () {
-  // empty existing posts from view
-  $booksList.empty();
+  // empty existing pics from view
+  $('.picDisplay').empty();
 
   // pass `allBooks` into the template function
-  var booksHtml = getAllBooksHtml(allBooks);
+  var photosHtml = getAllPhotosHtml(allPhotos);
 
   // append html to the view
-  $booksList.append(booksHtml);
+  $('.picDisplay').append(photosHtml);
 };
 
 function getAllBooksHtml(books) {
