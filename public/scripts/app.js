@@ -28,42 +28,12 @@ $(document).ready(function(){
   		method: 'GET',
   		url:'api/photography',
   		data:$(this).serialize(),
-  		success: searchLocationSuccess(),
-  		error: searchLocationError()
+  		success: searchSuccess,
+  		error: searchError
   	});
   });
 
-  $('#searchContentsForm').on('submit', function(e){
-  	e.preventDefault();
-  	$.ajax({
-  		method: 'GET',
-  		url:'api/photography',
-  		data:$(this).serialize()
-  	})
-  })
-
- /* $booksList.on('click', '.deleteBtn', function() {
-    $.ajax({
-      method: 'DELETE',
-      url: '/api/books/'+$(this).attr('data-id'),
-      success: deleteBookSuccess,
-      error: deleteBookError
-    });
-  });
-
-
-  $booksList.on('submit', '#addCharacterForm', function(e) {
-    e.preventDefault();
-    console.log('new characters');
-    $.ajax({
-      method: 'POST',
-      url: '/api/books/'+$(this).attr('data-id')+'/characters',
-      data: $(this).serializeArray(),
-      success: newCharacterSuccess,
-      error: newCharacterError
-    });
-  });
-*/
+  
 })
 
 function handleSuccess(json) {
@@ -72,7 +42,7 @@ function handleSuccess(json) {
 }
 
 function handleError(e) {
-  console.log('error');
+  console.log('error', e);
   $('.alertBox').text('Failed to load books, is the server working?');
 }
 
@@ -80,24 +50,29 @@ function newPhotoSuccess(json) {
   $('#newPhotoForm input').val('');
   console.log(json)
   allPhotos.push(json);
-  console.log(json)
-  console.log(allPhotos)
+  console.log(json);
+  console.log(allPhotos);
   //$("picDisplay").append(`<img src="")
   $('.alertBox1').text("Photo successfully added!")
 }
 
-function searchLocationSuccess (json){
+function searchSuccess (json){
 	$('#searchLocationForm input').val('');
-  console.log(json)
-  allPhotos.push(json);
-  console.log(json)
-  console.log(allPhotos)
-  //$("picDisplay").append(`<img src="")
-  $('.alertBox1').text("Photo successfully added!")
+	$('.picDisplay').html('');
+  console.log("search", json)
+
+  	json.forEach(photo => $('.picDisplay').append(`<img width="300px" src= ${photo.image}>`))
+  
+
+
+  //allPhotos.push(json);
+  // console.log(json)
+  // console.log(allPhotos)
+
 }
 
-function searchLocationError(e){
-	console.log("error")
+function searchError(e){
+	console.log("error", e)
 }
 
 function newPhotoError() {

@@ -75,7 +75,14 @@ app.get('/api/profile', function profile(req, res){
 
 app.get('/api/photography', function (req, res) {
   // find all photos
-  db.Photo.find({}, function(err, photos){
+  
+
+  var query = {};
+  for(var item in req.query){
+    if(req.query[item].length>1) query[item] = req.query[item]
+  }
+console.log(query)
+  db.Photo.find(query, function(err, photos){
       if (err) {
         res.status(500).send(err);
         return;
@@ -86,15 +93,7 @@ app.get('/api/photography', function (req, res) {
 
 
 
-app.get('/api/locations', function (req, res) {
-  db.Location.find({}, function(err, locations){
-      if(err){
-        res.status(500).send(err);
-        return;
-      }
-      res.json(locations);
-  });
-});
+
 
 
 //find one photo by id
