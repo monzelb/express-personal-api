@@ -21,7 +21,6 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
 
 /**********
  * ROUTES *
@@ -45,10 +44,7 @@ app.get('/', function (req, res) {
  */
 
 app.get('/api', function apiIndex(req, res) {
-  // TODO: Document all your api endpoints below as a simple hardcoded JSON object.
-  // It would be seriously overkill to save any of this to your database.
   res.json({
-     // CHANGE ME ;)
     message: "Welcome to my photography API! Here's what you need to know!",
     documentationUrl: "https://github.com/monzelb/express-personal-api/blob/master/README.md", // CHANGE ME
     baseUrl: "https://powerful-brushlands-77187.herokuapp.com/", // CHANGE ME
@@ -75,8 +71,6 @@ app.get('/api/profile', function profile(req, res){
 
 app.get('/api/photography', function (req, res) {
   // find all photos
-  
-
   var query = {};
   for(var item in req.query){
     if(req.query[item].length>1) query[item] = req.query[item]
@@ -113,7 +107,7 @@ app.get('/api/photography/:id', function (req, res) {
  })
 
  //update contents
-  app.put('/api/contents/:id', function(req,res){
+app.put('/api/contents/:id', function(req,res){
     var photoName = req.body.name;
     var photoContents = req.body.contents;
     var photoImage = req.body.image;
@@ -121,11 +115,11 @@ app.get('/api/photography/:id', function (req, res) {
     db.Photo.findByIdAndUpdate(PhotoId, {
         name: photoName,
         characteristics: photoContents,
-        image: photoImage}, {new: true}, function(err, photo){
+        image: photoImage, {new: true}, function(err, photo){
           if(err){return console.log(err);}
           res.json(photo);
         })
-  });
+});
 
 
 //post new photo

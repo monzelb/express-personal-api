@@ -51,9 +51,6 @@ function newPhotoSuccess(json) {
   $('#newPhotoForm input').val('');
   console.log(json)
   allPhotos.push(json);
-  console.log(json);
-  console.log(allPhotos);
-  //$("picDisplay").append(`<img src="")
   $('.alertBox1').text("Photo successfully added!")
 }
 
@@ -61,8 +58,6 @@ function searchSuccess (json){
 	$('.alertBox1').text("");
 	$('#searchLocationForm input').val('');
 	$('.picDisplay').html('');
-  console.log("search", json)
-
   	json.forEach(photo => $('.picDisplay').append(`<a><img src= ${photo.image}><button class="dltBtn" type= "button">Delete</button></a>`))
 
 }
