@@ -1,3 +1,4 @@
+
 console.log("Sanity Check: JS is working!");
 
 var allPhotos= [];
@@ -57,6 +58,7 @@ function newPhotoSuccess(json) {
 }
 
 function searchSuccess (json){
+	$('.alertBox1').text("");
 	$('#searchLocationForm input').val('');
 	$('.picDisplay').html('');
   console.log("search", json)
@@ -72,6 +74,3 @@ function searchError(e){
 function newPhotoError() {
   console.log("new book error!");
 }
-
-
-
