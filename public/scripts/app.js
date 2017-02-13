@@ -61,13 +61,7 @@ function searchSuccess (json){
 	$('.picDisplay').html('');
   console.log("search", json)
 
-  	json.forEach(photo => $('.picDisplay').append(`<img width="300px" src= ${photo.image}>`))
-  
-
-
-  //allPhotos.push(json);
-  // console.log(json)
-  // console.log(allPhotos)
+  	json.forEach(photo => $('.picDisplay').append(`<a><img src= ${photo.image}><button class="dltBtn" type= "button">Delete</button></a>`))
 
 }
 
@@ -79,21 +73,5 @@ function newPhotoError() {
   console.log("new book error!");
 }
 
-function render () {
-  // empty existing pics from view
-  $('.picDisplay').empty();
 
-  // pass `allBooks` into the template function
-  var photosHtml = getAllPhotosHtml(allPhotos);
 
-  // append html to the view
-  $('.picDisplay').append(photosHtml);
-};
-
-function getAllBooksHtml(books) {
-  return books.map(getBookHtml).join("");
-}
-
-function getPhotoHtml(photo){
-	return ''
-}

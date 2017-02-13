@@ -91,7 +91,15 @@ console.log(query)
   });
 });
 
-
+//delete a photo
+app.delete('/api/photography/:id', function (req, res) {
+  // get photo id from url params (`req.params`)
+  console.log('photo delete', req.params);
+  var photoId = req.params.id;
+  // find the index of the photo we want to remove
+  db.Photo.findOneAndRemove({ _id: photoId })
+  console.log("delete")
+});
 
 
 
